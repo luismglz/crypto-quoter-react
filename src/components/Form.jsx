@@ -29,11 +29,12 @@ const Form = () => {
 
 
 
-  const [SelectCurrencies] = useSelectCurrencies('Select a currency', currencies);
+  const [currency, SelectCurrencies] = useSelectCurrencies('Select a currency', currencies);
   
   return(
     <form>
       <SelectCurrencies/>
+      {currency}
       <InputSubmit 
         type="submit" 
         value="Quote"
