@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import styled from "@emotion/styled";
 import useSelectCurrencies from "../hooks/useSelectCurrencies";
 import {currencies} from '../data/currencies'
@@ -30,11 +30,26 @@ const Form = () => {
 
 
   const [currency, SelectCurrencies] = useSelectCurrencies('Select a currency', currencies);
+
+  useEffect(()=>{
+    const callAPI = async () => {
+      const URL = `https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=10&tsym=${currency}`;
+
+      const response = await fetch(URL);
+
+      const result = await response.json()
+
+      console.log(result.Data[0].DISPLAY);
+
+    }
+
+
+    callAPI();
+  },[])
   
   return(
     <form>
       <SelectCurrencies/>
-      {currency}
       <InputSubmit 
         type="submit" 
         value="Quote"
