@@ -26,7 +26,7 @@ const InputSubmit = styled.input`
 `
 
 
-const Form = () => {
+const Form = ({setCurrencies}) => {
 
   const [cryptos, setCryptos] = useState([]);
   const [error, setError] = useState(false);
@@ -44,7 +44,6 @@ const Form = () => {
       const response = await fetch(URL);
 
       const result = await response.json()
-      console.log(result);
 
       const topCryptos = result.Data.map(crypto => {
         const cryptoObj = {
@@ -74,7 +73,14 @@ const Form = () => {
 
 
 
-   etError(false);
+   setError(false);
+
+
+   setCurrencies({
+    currency,
+    cryptocurrency,
+   })
+
   } 
 
 
