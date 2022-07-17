@@ -30,8 +30,6 @@ const Form = ({setCurrencies}) => {
 
   const [cryptos, setCryptos] = useState([]);
   const [error, setError] = useState(false);
-  const [isEmptyCurrency, setIsEmptyCurrency] = useState(false);
-  const [isEmptyCrypto, setIsEmptyCrypto] = useState(false);
 
   const [currency, SelectCurrencies] = useSelectCurrencies('Select a currency', currencies);
 
