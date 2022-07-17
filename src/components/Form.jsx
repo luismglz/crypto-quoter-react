@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import useSelectCurrencies from "../hooks/useSelectCurrencies";
-import {currencies} from '../data/currencies'
+import { currencies } from '../data/currencies'
 
 
 const InputSubmit = styled.input`
@@ -31,7 +31,9 @@ const Form = () => {
 
   const [currency, SelectCurrencies] = useSelectCurrencies('Select a currency', currencies);
 
-  useEffect(()=>{
+  const [cryptocurrency, SelectCryptocurrencies] = useSelectCurrencies('Select a cryptocurrency', cryptos);
+
+  useEffect(() => {
     const callAPI = async () => {
       const URL = `https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=10&tsym=${currency}`;
 
@@ -40,7 +42,7 @@ const Form = () => {
       const result = await response.json()
       console.log(result);
 
-      const topCryptos = result.Data.map( crypto => {
+      const topCryptos = result.Data.map(crypto => {
         const cryptoObj = {
           id: crypto.CoinInfo.Name,
           name: crypto.CoinInfo.FullName
@@ -54,13 +56,16 @@ const Form = () => {
 
 
     callAPI();
-  },[])
+  }, [])
+
   
-  return(
+
+  return (
     <form>
-      <SelectCurrencies/>
-      <InputSubmit 
-        type="submit" 
+      <SelectCurrencies />
+      <SelectCryptocurrencies />
+      <InputSubmit
+        type="submit"
         value="Quote"
       />
     </form>
