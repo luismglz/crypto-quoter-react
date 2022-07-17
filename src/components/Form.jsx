@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import useSelectCurrencies from "../hooks/useSelectCurrencies";
 import {currencies} from '../data/currencies'
@@ -27,7 +27,7 @@ const InputSubmit = styled.input`
 
 const Form = () => {
 
-
+  const [cryptos, setCryptos] = useState([]);
 
   const [currency, SelectCurrencies] = useSelectCurrencies('Select a currency', currencies);
 
@@ -38,9 +38,18 @@ const Form = () => {
       const response = await fetch(URL);
 
       const result = await response.json()
+      console.log(result);
 
-      console.log(result.Data[0].DISPLAY);
+      const topCryptos = result.Data.map( crypto => {
+        const cryptoObj = {
+          id: crypto.CoinInfo.Name,
+          name: crypto.CoinInfo.FullName
+        }
+        return cryptoObj;
+      })
 
+      //setState with cryptos array
+      setCryptos(topCryptos);
     }
 
 
