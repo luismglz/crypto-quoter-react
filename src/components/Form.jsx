@@ -37,10 +37,8 @@ const Form = ({setCurrencies}) => {
 
   useEffect(() => {
     const callAPI = async () => {
-      const URL = `https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=10&tsym=${'JPY'}`;
-
+      const URL = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=20&tsym=USD`;
       const response = await fetch(URL);
-
       const result = await response.json()
 
       const topCryptos = result.Data.map(crypto => {
@@ -54,7 +52,6 @@ const Form = ({setCurrencies}) => {
       //setState with cryptos array
       setCryptos(topCryptos);
     }
-
 
     callAPI();
   }, [])
